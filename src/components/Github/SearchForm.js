@@ -27,7 +27,6 @@ const SearchForm = ({ params, onParamChange }) => {
           onChange={onParamChange}
           value={params.full_time}
           type="checkbox"
-          className="mb-2"
         />
       </div>
     </form>

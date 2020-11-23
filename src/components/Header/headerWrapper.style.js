@@ -36,7 +36,7 @@ const HeaderWrapper = styled.div`
   .externalLinks {
     display: flex;
     width: auto;
-    margin: 20px 30px auto auto;
+    margin: 25px 30px auto auto;
   }
 
   .links {
@@ -49,14 +49,14 @@ const HeaderWrapper = styled.div`
 
     a {
       text-decoration: none;
-      font-size: 25px;
+      font-size: 20px;
       font-weight: 500;
     }
   }
 
   .socialIcons {
     display: block;
-    width: 30px;
+    width: 20px;
     margin-right: 10px;
   }
 `

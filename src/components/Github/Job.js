@@ -1,52 +1,65 @@
 import React, { useState } from "react"
-import { Badge, Button, Card, Collapse } from "react-bootstrap"
 import ReactMarkdown from "react-markdown"
+import Default from "../../images/default.png"
 
 const Job = ({ job }) => {
   const [open, setOpen] = useState(false)
   return (
     <div className="card">
-      <Card.Body>
-        <div className="d-flex justify-content-between">
-          <div>
-            <Card.Title>
-              {job.title} -{" "}
-              <span className="text-muted font-weight-light">
-                {job.company}
-              </span>
-            </Card.Title>
-            <Card.Subtitle className="text-muted mb-2">
+      <div className="titleAndImage">
+        <div className="contents">
+          <div className="titleAndDate">
+            <h2 className="companyTitle">
+              {job.title} - <span>{job.company}</span>
+            </h2>
+            <h4 className="dateCreated">
               {new Date(job.created_at).toLocaleDateString()}
-            </Card.Subtitle>
-            <Badge variant="primary" className="mr-2">
-              {job.type}
-            </Badge>
-            <Badge variant="secondary">{job.location}</Badge>
-            <div style={{ wordBreak: "break-all" }}>
-              <ReactMarkdown source={job.how_to_apply} />
-            </div>
+            </h4>
           </div>
-          <img
-            src={job.company_logo}
-            alt={job.company_logo}
-            className="d-sm-none d-md-block"
-            height="50"
-          />
+
+          <div className="preAndCode">
+            <pre>
+              <code variant="primary" className="jobType">
+                {job.type}
+              </code>
+            </pre>
+            <pre>
+              <code variant="secondary">{job.location}</code>
+            </pre>
+          </div>
+          <div className="hotToApply">
+            <p>How to Apply:-</p>
+            <ReactMarkdown source={job.how_to_apply} />
+          </div>
+          <div className="viewAndHideBtn">
+            <button
+              onClick={() => setOpen(prevOpen => !prevOpen)}
+              variant="primary"
+            >
+              {!open ? "View Details" : "Hide Details"}
+            </button>
+          </div>
         </div>
-        <Card.Text>
-          <Button
-            onClick={() => setOpen(prevOpen => !prevOpen)}
-            variant="primary"
-          >
-            {!open ? "View Details" : "Hide Details"}
-          </Button>
-        </Card.Text>
-        <Collapse in={open}>
-          <div className="mt-4">
+        <div className="companyImgContainer">
+          {job.company_logo ? (
+            <img
+              src={job.company_logo}
+              alt={job.company_logo}
+              className="companyImage"
+              height="50"
+            />
+          ) : (
+            <img src={Default} alt="Company logo" className="companyImage" />
+          )}
+        </div>
+      </div>
+      <div className="details">
+        {open && (
+          <div>
             <ReactMarkdown source={job.description} />
           </div>
-        </Collapse>
-      </Card.Body>
+        )}
+      </div>
     </div>
   )
 }

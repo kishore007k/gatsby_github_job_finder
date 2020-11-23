@@ -28,13 +28,13 @@ const DisplayJobs = () => {
       <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage} />
       {loading && <PreLoader />}
       {error && <h1>Error. Try Refreshing</h1>}
-      {jobs.map(job => {
-        return (
-          <div key={job.id} className="cardContainer">
-            <Job job={job} />
-          </div>
-        )
-      })}
+      <div className="jobCard">
+        <div className="cardContainer">
+          {jobs.map(job => {
+            return <Job key={job.id} job={job} />
+          })}
+        </div>
+      </div>
       <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage} />
     </Wrapper>
   )
